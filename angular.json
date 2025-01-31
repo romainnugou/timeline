@@ -71,10 +71,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "timeline:build:production"
+              "buildTarget": "timeline:build:production"
             },
             "development": {
-              "browserTarget": "timeline:build:development"
+              "buildTarget": "timeline:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "timeline:build"
+            "buildTarget": "timeline:build"
           }
         },
         "test": {
