@@ -1,8 +1,9 @@
 import { Component, OnChanges, Input, Output, EventEmitter, ViewChildren, Renderer2, ElementRef, QueryList } from '@angular/core';
 
 @Component({
-  selector: 'app-event',
-  templateUrl: './event.component.html'
+    selector: 'app-event',
+    templateUrl: './event.component.html',
+    standalone: false
 })
 export class EventComponent implements OnChanges {
   @Input() event: any;

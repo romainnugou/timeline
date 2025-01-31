@@ -3,8 +3,9 @@ import { Component, Input, OnChanges, Output, EventEmitter, Renderer2, HostListe
 import { DataService } from '../../data/data.service';
 
 @Component({
-  selector: 'app-lightbox',
-  templateUrl: './lightbox.component.html'
+    selector: 'app-lightbox',
+    templateUrl: './lightbox.component.html',
+    standalone: false
 })
 export class LightboxComponent implements OnChanges {
   @Input() eventId: number;

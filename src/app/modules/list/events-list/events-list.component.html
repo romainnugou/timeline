@@ -1,5 +1,5 @@
 <div class="list-container">
-  <ul *ngFor="let category of this.list">
+  <ul *ngFor="let category of list">
     <li>
       <div class="category-name">
         {{ category.name }}
@@ -7,7 +7,7 @@
       <ul *ngFor="let event of category.events">
         <li>
           <div class="event-name"
-            [ngClass]="{'active': event.id == this.selectedEventId}"
+            [ngClass]="{'active': event.id == selectedEventId}"
             (click)="selectEvent(event.id)">
             <span class="event-name-text">{{ event.name }}</span>
             <span class="event-name-cursor"></span>
@@ -21,6 +21,6 @@
 </div>
 
 <button class="close-button"
-  (click)="this.closeMobileNavigation()">
+  (click)="closeMobileNavigation()">
   <i class="fas fa-times"></i>
 </button>

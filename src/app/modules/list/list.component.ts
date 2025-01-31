@@ -4,8 +4,9 @@ import { DataService } from '../../data/data.service';
 import { events } from 'src/app/data/events.store';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html'
+    selector: 'app-list',
+    templateUrl: './list.component.html',
+    standalone: false
 })
 export class ListComponent implements OnInit{
   events: any;
