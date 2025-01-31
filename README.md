@@ -1,27 +1,42 @@
 # Timeline
 
-Developed by Romain Nugou ([romainnugou.com](https://romainnugou.com)).
+A simple timeline application.
 
-## Demo
+Events grouped by years.
 
-[timeline.romainnugou.com](https://timeline.romainnugou.com)
+## Run project
 
-Keyboard navigation available.
+### Clone and install dependencies
 
-## Start project
+Clone the project and un `npm install` to install dependencies.
 
-Run `npm install` to install dependencies.
-Then run `ng serve` for the dev server (`http://localhost:4200/`).
-
-## Add your photos
+### Add your photos
 
 Update `src/app/data/events.store.ts` with your events and photos name.
 And then add your image files in `src/assets/img` with the rights folders set in `events.store.ts`.
 
-## Build it
+### Build it
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+## Keyboard shortcuts
+
+<kbd>↑</kbd> and <kbd>↓</kbd>: Navigate between events
+
+<kbd>←</kbd> and <kbd>→</kbd>: Navigate between pictures in full-size mode
+
+<kbd>Enter</kbd> or <kbd>Space</kbd>: Enter and exit pictures full-size mode of current event
+
+<kbd>Esc</kbd>: Exit pictures full-size mode and info panel
+
+<kbd>i</kbd>: Display and hide info panel
+
+## Demo
+
+[romainnugou.com/timeline](https://romainnugou.com/timeline)
+
 ## About
 
-Built with Angular 19, Angular CLI, Google Fonts and Font-Awesome.
+Built with Angular 19.
+
+Made by [Romain Nugou](https://romainnugou.com).
