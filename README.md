@@ -24,4 +24,4 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## About
 
-Built with Angular 15, Angular CLI, Google Fonts and Font-Awesome.
+Built with Angular 16, Angular CLI, Google Fonts and Font-Awesome.
