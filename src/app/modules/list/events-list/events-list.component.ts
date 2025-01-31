@@ -3,8 +3,9 @@ import { Component, Output, EventEmitter, Input, AfterViewInit, Renderer2, Eleme
 import { DataService } from '../../../data/data.service';
 
 @Component({
-  selector: 'app-events-list',
-  templateUrl: './events-list.component.html'
+    selector: 'app-events-list',
+    templateUrl: './events-list.component.html',
+    standalone: false
 })
 export class EventsListComponent implements AfterViewInit {
   @Input() selectedEventId: number;

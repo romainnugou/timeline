@@ -15,12 +15,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/timeline",
+            "outputPath": {
+              "base": "dist/timeline"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
@@ -28,9 +31,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/css/styles.less"
+              "src/assets/css/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -46,8 +50,6 @@
               "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -60,24 +62,29 @@
                   "maximumError": "10kb"
                 }
               ]
-            }
-          }
+            },
+            "development": {}
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "timeline:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "timeline:build:production"
+              "buildTarget": "timeline:build:production"
+            },
+            "development": {
+              "buildTarget": "timeline:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "timeline:build"
+            "buildTarget": "timeline:build"
           }
         },
         "test": {
@@ -92,7 +99,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/css/styles.less"
+              "src/assets/css/styles.css"
             ],
             "scripts": []
           }
@@ -113,16 +120,19 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "timeline:serve"
+            "protractorConfig": "e2e/protractor.conf.js"
           },
           "configurations": {
             "production": {
               "devServerTarget": "timeline:serve:production"
+            },
+            "development": {
+              "devServerTarget": "timeline:serve:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         }
       }
-    }},
-  "defaultProject": "timeline"
+    }
+  }
 }

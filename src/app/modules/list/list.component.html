@@ -4,7 +4,7 @@
     <div class="navigation-mobile">
       <!-- Mobile menu button -->
       <button class="mobile-menu"
-        (click)="this.toggleMobileNavigation()">
+        (click)="toggleMobileNavigation()">
         <i class="fas fa-bars"></i>
       </button>
     </div>
@@ -12,14 +12,14 @@
       <!-- Info button -->
       <button class="info-button"
         id="info-button"
-        [ngClass]="{'upper': !this.scrollTopButtonHidden}"
-        (click)="this.displayInfo()">
+        [ngClass]="{'upper': !scrollTopButtonHidden}"
+        (click)="displayInfo()">
         <i class="fas fa-info"></i>
       </button>
       <!-- Scroll top button -->
       <button class="scroll-top-button"
-        [ngClass]="{'hidden': this.scrollTopButtonHidden}"
-        (click)="this.scrollTop()">
+        [ngClass]="{'hidden': scrollTopButtonHidden}"
+        (click)="scrollTop()">
         <i class="fas fa-arrow-up"></i>
       </button>
     </div>
@@ -27,15 +27,15 @@
 
   <!-- Events list -->
   <app-events-list
-    [ngClass]="{'hidden': !this.mobileNavigationOpen}"
+    [ngClass]="{'hidden': !mobileNavigationOpen}"
     (eventSelect)="displayEvent($event)"
     (closeMobileNavigationEvent)="closeMobileNavigation()"
-    [selectedEventId]="this.selectedEventId">
+    [selectedEventId]="selectedEventId">
   </app-events-list>
 
   <!-- Events images -->
   <div class="events">
-    <app-event *ngFor="let event of this.eventsList"
+    <app-event *ngFor="let event of eventsList"
       [id]="'event_' + event.id"
       [event]="event"
       (openLightbox)="openLightbox($event)">
@@ -44,17 +44,17 @@
 
   <!-- Full size display component -->
   <app-lightbox
-    [eventId]="this.lightboxEventId"
-    [imageI]="this.lightboxImageI"
-    (closed)="this.lightboxClosed()">
+    [eventId]="lightboxEventId"
+    [imageI]="lightboxImageI"
+    (closed)="lightboxClosed()">
   </app-lightbox>
 
   <!-- Full size info overlay -->
   <div class="info-overlay"
-    [ngClass]="{'hidden': this.infoOverlayHidden}">
+    [ngClass]="{'hidden': infoOverlayHidden}">
     <!-- Close button -->
     <button class="close-button"
-      (click)="this.hideInfo()">
+      (click)="hideInfo()">
       <i class="fas fa-times"></i>
     </button>
 

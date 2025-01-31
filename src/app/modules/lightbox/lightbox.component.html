@@ -1,22 +1,22 @@
 <div class="lightbox-container"
- [ngClass]="{'hidden': !this.active}">
+ [ngClass]="{'hidden': !active}">
   <!-- Images -->
-  <div *ngIf="this.event != null"
+  <div *ngIf="event != null"
     class="lightbox-images">
-    <div *ngFor="let image of this.event.images; let i = index;"
+    <div *ngFor="let image of event.images; let i = index;"
       class="lightbox-image"
-      [style.background-image]="'url(assets/img/' + this.event.folder + '/' + image + ')'"
+      [style.background-image]="'url(assets/img/' + event.folder + '/' + image + ')'"
       [ngClass]="{
-        'active': i == this.imageI,
-        'left-hidden': i < this.imageI,
-        'right-hidden': i > this.imageI
+        'active': i == imageI,
+        'left-hidden': i < imageI,
+        'right-hidden': i > imageI
       }">
     </div>
   </div>
 
   <!-- Close button -->
   <button class="close-button"
-    (click)="this.close()">
+    (click)="close()">
     <i class="fas fa-times"></i>
   </button>
 </div>

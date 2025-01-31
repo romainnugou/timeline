@@ -24,5 +24,4 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## About
 
-Built with Angular 9, Angular-CLI, Google Fonts and Font-Awesome.
-Images lazy loading is built with the ng-lazyload-image package.
+Built with Angular 19, Angular CLI, Google Fonts and Font-Awesome.
