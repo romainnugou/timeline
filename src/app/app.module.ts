@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,8 +22,7 @@ import { LightboxComponent } from './modules/lightbox/lightbox.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    LazyLoadImageModule
+    AppRoutingModule
   ],
   providers: [
     DataService
