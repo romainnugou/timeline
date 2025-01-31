@@ -28,7 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/css/styles.less"
+              "src/assets/css/styles.css"
             ],
             "scripts": []
           },
@@ -92,7 +92,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/css/styles.less"
+              "src/assets/css/styles.css"
             ],
             "scripts": []
           }
@@ -123,6 +123,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "timeline"
 }
