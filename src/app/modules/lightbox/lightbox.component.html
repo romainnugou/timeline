@@ -1,18 +1,20 @@
 <div class="lightbox-container"
  [ngClass]="{'hidden': !active}">
   <!-- Images -->
-  <div *ngIf="event != null"
-    class="lightbox-images">
-    <div *ngFor="let image of event.images; let i = index;"
-      class="lightbox-image"
-      [style.background-image]="'url(assets/img/' + event.folder + '/' + image + ')'"
-      [ngClass]="{
-        'active': i == imageI,
-        'left-hidden': i < imageI,
-        'right-hidden': i > imageI
-      }">
+   @if(event != null) {
+    <div class="lightbox-images">
+      @for(image of event.images; track $index) {
+        <div class="lightbox-image"
+          [style.background-image]="'url(assets/img/' + event.folder + '/' + image + ')'"
+          [ngClass]="{
+            'active': $index == imageI,
+            'left-hidden': $index < imageI,
+            'right-hidden': $index > imageI
+          }">
+        </div>
+      }
     </div>
-  </div>
+   }
 
   <!-- Close button -->
   <button class="close-button"

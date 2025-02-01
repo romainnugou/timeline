@@ -35,11 +35,12 @@
 
   <!-- Events images -->
   <div class="events">
-    <app-event *ngFor="let event of eventsList"
-      [id]="'event_' + event.id"
-      [event]="event"
-      (openLightbox)="openLightbox($event)">
-    </app-event>
+    @for(event of eventsList; track $index) {
+      <app-event [id]="'event_' + event.id"
+        [event]="event"
+        (openLightbox)="openLightbox($event)">
+      </app-event>
+    }
   </div>
 
   <!-- Full size display component -->

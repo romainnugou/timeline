@@ -1,20 +1,22 @@
 <!-- If 4 or less images -->
-<div class="event-container"
-  [ngClass]="{'visible': loaded}">
-  <img *ngFor="let image of imagesList; let i = index;" #image
-    [src]="'assets/img/' + event.folder + '/' + image"
-    alt=""
-    loading="lazy"
-    (load)="onLoad($event)"
-    (click)="openImage(i)" />
+<div class="event-container" [ngClass]="{'visible': loaded}">
+  @for(image of imagesList; track $index) {
+    <img #image
+      [src]="'assets/img/' + event.folder + '/' + image"
+      alt=""
+      loading="lazy"
+      (load)="onLoad($event)"
+      (click)="openImage($index)" />
+  }
 
-  <div *ngIf="event.images.length > maxImages"
-    class="event-plus-button"
-    [style.height]="plusButtonHeight + 'px'"
-    [style.background-image]="'url(assets/img/' + event.folder + '/' + event.images[maxImages] + ')'"
-    (click)="openImage(maxImages)">
-    <i class="fas fa-plus"></i>
-  </div>
+  @if(event.images.length > maxImages) {
+    <div class="event-plus-button"
+      [style.height]="plusButtonHeight + 'px'"
+      [style.background-image]="'url(assets/img/' + event.folder + '/' + event.images[maxImages] + ')'"
+      (click)="openImage(maxImages)">
+      <i class="fas fa-plus"></i>
+    </div>
+  }
 </div>
 
 <div class="event-info"
