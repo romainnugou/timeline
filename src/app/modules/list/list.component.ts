@@ -23,6 +23,7 @@ export class ListComponent implements OnInit{
 
   infoOverlayHidden: boolean = true;
   scrollTopButtonHidden: boolean = true;
+  lastArrowUpPress: number = 0;
 
   constructor(private data: DataService, private renderer: Renderer2) {
     this.events = this.data.getEvents();
@@ -131,10 +132,22 @@ export class ListComponent implements OnInit{
     // When lightbox, info panel and mobile navigation aren't open
     if(this.lightboxEventId == -1 && this.infoOverlayHidden && !this.mobileNavigationOpen) {
       // Navigation keys
+
       // Arrow up
       if(event.key == 'ArrowUp') {
         event.preventDefault();
-        this.displayPreviousEvent();
+        const now = Date.now();
+
+        if (now - this.lastArrowUpPress < 300) {
+          // Double press
+          this.scrollTop();
+        } else {
+          // Simple
+          this.displayPreviousEvent();
+        }
+        this.lastArrowUpPress = now;
+
+        // this.displayPreviousEvent();
       }
       // Arrow down
       if(event.key == 'ArrowDown') {

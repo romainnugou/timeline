@@ -5,7 +5,8 @@
   --slow-time: 0.6s;
   --lightbox-animation-time: 0.3s;
 
-  --main-font-family: "Montserrat", sans-serif;
+  --main-font-family: "Roboto", sans-serif;
+  --main-font-weight: 400;
 
   /* Light mode colors */
   --text-color: black;
@@ -46,7 +47,7 @@
     --event-color: #c0c0c0;
     --lightbox-background-color: #080c12;
     --lightbox-close-button-color: #e0e0e0;
-    --info-overlay-background-color: rgba(0,0,0,0.8);
+    --info-overlay-background-color: rgba(0, 0, 0, 0.8);
     --info-overlay-close-button-color: #c0c0c0;
     --info-overlay-key-color: #4ea5c3;
     --info-overlay-text-color: var(--text-color);
@@ -83,6 +84,7 @@ body {
   margin: 0;
   background-color: var(--background-color);
   font-family: var(--main-font-family);
+  font-weight: var(--main-font-weight);
 }
 .noscroll {
   overflow: hidden !important;
@@ -157,11 +159,11 @@ body {
 .list-container app-events-list .list-container ul li .category-name,
 .list-container app-events-list .list-container ul li .event-name {
   padding: 7px 10px 7px 15px;
-  font-size: 18px;
+  font-size: 1.25rem;
 }
 .list-container app-events-list .list-container ul li .category-name {
   color: var(--list-navigation-title-color);
-  padding-right: 50px;
+  padding-right: 55px;
 }
 .list-container app-events-list .list-container ul li .event-name {
   display: inline-flex;
@@ -173,24 +175,12 @@ body {
   cursor: pointer;
   transition: var(--default-time);
 }
-.list-container
-  app-events-list
-  .list-container
-  ul
-  li
-  .event-name
-  .event-name-text {
+.list-container app-events-list .list-container ul li .event-name .event-name-text {
   color: var(--list-navigation-event-color);
   line-height: 25px;
   transition: var(--default-time);
 }
-.list-container
-  app-events-list
-  .list-container
-  ul
-  li
-  .event-name
-  .event-name-cursor {
+.list-container app-events-list .list-container ul li .event-name .event-name-cursor {
   margin-left: 30px;
   display: inline-block;
   width: 11px;
@@ -201,53 +191,23 @@ body {
   border-radius: 10px;
   transition: var(--default-time);
 }
-.list-container
-  app-events-list
-  .list-container
-  ul
-  li
-  .event-name:not(.active):hover
-  .event-name-text {
+.list-container app-events-list .list-container ul li .event-name:not(.active):hover .event-name-text {
   color: var(--list-navigation-event-hover-color);
   transform: scale(1.1);
 }
-.list-container
-  app-events-list
-  .list-container
-  ul
-  li
-  .event-name:not(.active):hover
-  .event-name-cursor {
+.list-container app-events-list .list-container ul li .event-name:not(.active):hover .event-name-cursor {
   border-color: var(--list-navigation-event-hover-color);
 }
 .list-container app-events-list .list-container ul li .event-name.active {
   background-color: var(--list-navigation-selected-background-color);
 }
-.list-container
-  app-events-list
-  .list-container
-  ul
-  li
-  .event-name.active
-  .event-date {
+.list-container app-events-list .list-container ul li .event-name.active .event-date {
   display: inline;
 }
-.list-container
-  app-events-list
-  .list-container
-  ul
-  li
-  .event-name.active
-  .event-name-text {
+.list-container app-events-list .list-container ul li .event-name.active .event-name-text {
   color: var(--list-navigation-selected-color);
 }
-.list-container
-  app-events-list
-  .list-container
-  ul
-  li
-  .event-name.active
-  .event-name-cursor {
+.list-container app-events-list .list-container ul li .event-name.active .event-name-cursor {
   background-color: var(--list-navigation-selected-color);
   border-color: var(--list-navigation-selected-color);
 }
@@ -304,11 +264,12 @@ body {
 }
 .list-container .events app-event .event-info .event-name {
   color: var(--event-color);
-  font-size: 18px;
+  font-size: 1.25rem;
 }
 .list-container .events app-event .event-info .event-date {
+  margin-top: 5px;
   color: var(--event-color);
-  font-size: 14px;
+  font-size: 0.85rem;
 }
 .list-container .events app-event .event-container:not(.visible),
 .list-container .events app-event .event-info:not(.visible) {
@@ -433,16 +394,17 @@ app-lightbox .lightbox-container.hidden {
   border: 2px solid var(--info-overlay-key-color);
   box-shadow: 0px 4px 0px 0px var(--info-overlay-key-color);
   color: var(--info-overlay-key-color);
-  cursor: pointer;
   transition: var(--default-time);
-}
-.info-overlay .info-section .info-illustration .key:hover {
-  margin: 9px 5px 0;
-  box-shadow: 0px 0px 0px 0px var(--info-overlay-key-color);
 }
 .info-overlay .info-section .info-illustration .key.adaptive-key {
   width: auto;
   padding: 0 10px;
+}
+.info-overlay .info-section .info-illustration .double {
+  margin-top: 14px;
+  margin-left: 5px;
+  color: var(--text-color);
+  font-size: 18px;
 }
 .info-overlay .info-section .info-explaination {
   width: 60%;
@@ -452,13 +414,7 @@ app-lightbox .lightbox-container.hidden {
   align-items: center;
   color: var(--info-overlay-text-color);
 }
-.info-overlay .info-section p {
-  width: 100%;
-  text-align: center;
-  color: var(--text-color);
-  margin: 30px;
-}
-.info-overlay .info-section p a {
+.info-overlay .info-section .info-explaination p a {
   color: var(--info-overlay-key-color);
 }
 .info-overlay.hidden {
@@ -580,13 +536,7 @@ app-lightbox .lightbox-container.hidden {
     display: flex;
     justify-content: flex-start;
   }
-  .list-container
-    app-events-list
-    .list-container
-    ul
-    li
-    .event-name
-    .event-name-cursor {
+  .list-container app-events-list .list-container ul li .event-name .event-name-cursor {
     display: none;
   }
   .list-container app-events-list .list-container .line {

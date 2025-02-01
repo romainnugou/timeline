@@ -23,6 +23,8 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 <kbd>↑</kbd> and <kbd>↓</kbd>: Navigate between events
 
+<kbd>↑</kbd> x2: Double press to go back to top
+
 <kbd>←</kbd> and <kbd>→</kbd>: Navigate between pictures in full-size mode
 
 <kbd>Enter</kbd> or <kbd>Space</kbd>: Enter and exit pictures full-size mode of current event
