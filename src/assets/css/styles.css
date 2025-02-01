@@ -94,6 +94,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  transition: var(--default-time);
 }
 .list-container .navigation button,
 .list-container .navigation a.button {

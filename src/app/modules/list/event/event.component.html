@@ -4,6 +4,7 @@
   <img *ngFor="let image of imagesList; let i = index;" #image
     [src]="'assets/img/' + event.folder + '/' + image"
     alt=""
+    loading="lazy"
     (load)="onLoad($event)"
     (click)="openImage(i)" />
 
