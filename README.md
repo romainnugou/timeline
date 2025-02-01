@@ -12,8 +12,9 @@ Clone the project and un `npm install` to install dependencies.
 
 ### Add your photos
 
-Update `src/app/data/events.store.ts` with your events and photos name.
-And then add your image files in `src/assets/img` with the rights folders set in `events.store.ts`.
+Update `src/assets/events.json` with your events and photos name.
+
+And then add your image files in `src/assets/img` with the rights folders set in `events.json`.
 
 ### Build it
 

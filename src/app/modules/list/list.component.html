@@ -28,9 +28,10 @@
   <!-- Events list -->
   <app-events-list
     [ngClass]="{'hidden': !mobileNavigationOpen}"
+    [list]="list"
+    [selectedEventId]="selectedEventId"
     (eventSelect)="displayEvent($event)"
-    (closeMobileNavigationEvent)="closeMobileNavigation()"
-    [selectedEventId]="selectedEventId">
+    (closeMobileNavigationEvent)="closeMobileNavigation()">
   </app-events-list>
 
   <!-- Events images -->

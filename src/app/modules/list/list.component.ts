@@ -1,7 +1,6 @@
 import { Component, HostListener, Renderer2, OnInit } from '@angular/core';
 
 import { DataService } from '../../data/data.service';
-import { events } from 'src/app/data/events.store';
 
 @Component({
     selector: 'app-list',
@@ -11,6 +10,7 @@ import { events } from 'src/app/data/events.store';
 export class ListComponent implements OnInit{
   events: any;
   eventsList: any = [];
+  list: any = [];
 
   timer: any;
 
@@ -25,25 +25,30 @@ export class ListComponent implements OnInit{
   scrollTopButtonHidden: boolean = true;
   lastArrowUpPress: number = 0;
 
-  constructor(private data: DataService, private renderer: Renderer2) {
-    this.events = this.data.getEvents();
-    this.selectedEventId = this.events[0].id;
-  }
+  constructor(private data: DataService, private renderer: Renderer2) {}
 
   ngOnInit(): void {
-    if(this.events.length > 0) {
-      this.eventsList.push(this.events[0]);
-    }
+    this.data.getEvents()
+    .subscribe((data: any) => { 
+      this.events = data;
+      this.list = this.data.getList();
+      this.selectedEventId = this.events[0].id;
 
-    let index: number = 1;
-    this.timer = setInterval(() => {
-        if (index < this.events.length) {
-          this.eventsList.push(this.events[index]);
-          index++;
-        } else { 
-          clearInterval(this.timer); 
-        }
-    }, 250);
+      this.eventsList = this.events;
+
+      // if(this.events.length > 0) {
+      //   this.eventsList.push(this.events[0]);
+      // }
+      // let index: number = 1;
+      // this.timer = setInterval(() => {
+      //   if (index < this.events.length) {
+      //     this.eventsList.push(this.events[index]);
+      //     index++;
+      //   } else { 
+      //     clearInterval(this.timer); 
+      //   }
+      // }, 300);
+    });
   }
 
   displayEvent(eventId: number): void {
@@ -103,19 +108,19 @@ export class ListComponent implements OnInit{
     let margin: number = Math.floor(window.innerHeight * 15 / 100);
 
     // Events
-    for(let i=0; i<events.length; i++) {
-      let el = document.getElementById('event_' + events[i].id);
+    for(let i=0; i<this.events.length; i++) {
+      let el = document.getElementById('event_' + this.events[i].id);
 
       // If event fills 50% or more of the scree
       if(el.offsetTop > window.pageYOffset + Math.round(window.innerHeight * 0.5)) {
         if(i > 0) {
-          this.selectedEventId = events[i - 1].id;
+          this.selectedEventId = this.events[i - 1].id;
         } else {
-          this.selectedEventId = events[i].id;
+          this.selectedEventId = this.events[i].id;
         }
         break;
-      } else if(i == events.length - 1) {
-        this.selectedEventId = events[i].id;
+      } else if(i == this.events.length - 1) {
+        this.selectedEventId = this.events[i].id;
       }
     }
 
@@ -146,8 +151,6 @@ export class ListComponent implements OnInit{
           this.displayPreviousEvent();
         }
         this.lastArrowUpPress = now;
-
-        // this.displayPreviousEvent();
       }
       // Arrow down
       if(event.key == 'ArrowDown') {

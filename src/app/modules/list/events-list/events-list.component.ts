@@ -1,25 +1,22 @@
-import { Component, Output, EventEmitter, Input, AfterViewInit, Renderer2, ElementRef, HostListener } from '@angular/core';
-
-import { DataService } from '../../../data/data.service';
+import { Component, Output, EventEmitter, Input, OnChanges, Renderer2, ElementRef, HostListener } from '@angular/core';
 
 @Component({
     selector: 'app-events-list',
     templateUrl: './events-list.component.html',
     standalone: false
 })
-export class EventsListComponent implements AfterViewInit {
+export class EventsListComponent implements OnChanges {
+  @Input() list: any;
   @Input() selectedEventId: number;
   @Output() eventSelect = new EventEmitter();
   @Output() closeMobileNavigationEvent = new EventEmitter();
 
-  list: any;
+  constructor(private renderer: Renderer2, private el: ElementRef) {}
 
-  constructor(private data: DataService, private renderer: Renderer2, private el: ElementRef) {
-    this.list = this.data.getList();
-  }
-
-  ngAfterViewInit(): void {
-    this.setListPosition();
+  ngOnChanges(): void {
+    setTimeout(() => {
+      this.setListPosition();
+    }, 0);
   }
 
   selectEvent(eventId: number): void {
@@ -44,6 +41,10 @@ export class EventsListComponent implements AfterViewInit {
       let top: number = Math.round((window.innerHeight / 2) - (listHeight / 2));
       this.renderer.setStyle(this.el.nativeElement.querySelector('.list-container'), 'top', `${top}px`);
     }
+
+    setTimeout(() => {
+      this.renderer.setStyle(this.el.nativeElement.querySelector('.list-container'), 'opacity', '1');
+    }, 300);
   }
 
   @HostListener('window:scroll', ['$event'])

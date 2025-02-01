@@ -148,6 +148,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 25px;
+  opacity: 0;
 }
 .list-container app-events-list .list-container ul {
   list-style-type: none;
