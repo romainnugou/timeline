@@ -12,8 +12,6 @@ export class ListComponent implements OnInit{
   eventsList: any = [];
   list: any = [];
 
-  timer: any;
-
   mobileNavigationOpen: boolean = false;
 
   selectedEventId: number;
@@ -35,19 +33,6 @@ export class ListComponent implements OnInit{
       this.selectedEventId = this.events[0].id;
 
       this.eventsList = this.events;
-
-      // if(this.events.length > 0) {
-      //   this.eventsList.push(this.events[0]);
-      // }
-      // let index: number = 1;
-      // this.timer = setInterval(() => {
-      //   if (index < this.events.length) {
-      //     this.eventsList.push(this.events[index]);
-      //     index++;
-      //   } else { 
-      //     clearInterval(this.timer); 
-      //   }
-      // }, 300);
     });
   }
 
@@ -111,13 +96,11 @@ export class ListComponent implements OnInit{
     for(let i=0; i<this.events.length; i++) {
       let el = document.getElementById('event_' + this.events[i].id);
 
+      if (!el) continue;
+
       // If event fills 50% or more of the scree
-      if(el.offsetTop > window.pageYOffset + Math.round(window.innerHeight * 0.5)) {
-        if(i > 0) {
-          this.selectedEventId = this.events[i - 1].id;
-        } else {
-          this.selectedEventId = this.events[i].id;
-        }
+      if(el.offsetTop > window.scrollY + Math.round(window.innerHeight * 0.5)) {
+        this.selectedEventId = i > 0 ? this.events[i - 1].id : this.events[i].id;
         break;
       } else if(i == this.events.length - 1) {
         this.selectedEventId = this.events[i].id;
@@ -125,11 +108,7 @@ export class ListComponent implements OnInit{
     }
 
     // Scroll top button
-    if(window.pageYOffset > 300 && this.scrollTopButtonHidden) {
-      this.scrollTopButtonHidden = false;
-    } else if(window.pageYOffset <= 300 && !this.scrollTopButtonHidden) {
-      this.scrollTopButtonHidden = true;
-    }
+    this.scrollTopButtonHidden = window.scrollY <= 300;
   }
 
   @HostListener('document:keydown', ['$event'])
