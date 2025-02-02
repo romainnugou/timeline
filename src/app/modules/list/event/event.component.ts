@@ -25,11 +25,7 @@ export class EventComponent implements OnChanges {
   constructor(private renderer: Renderer2, private el:ElementRef) { }
 
   ngOnChanges(): void {
-    if(this.event.images.length > this.maxImages) {
-      this.imagesList = this.event.images.slice(0, 4);
-    } else {
-      this.imagesList = this.event.images;
-    }
+    this.imagesList = this.event.images.slice(0, 4);
   }
 
   onLoad($event: any): void {
