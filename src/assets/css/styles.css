@@ -5,10 +5,53 @@
   --slow-time: 0.6s;
   --lightbox-animation-time: 0.3s;
 
-  --main-font-family: 'Montserrat', sans-serif;
+  --main-font-family: "Roboto", sans-serif;
+  --main-font-weight: 400;
 
-  --highlight-color: black;
-  --selected-color: #228FB4;
+  /* Light mode colors */
+  --text-color: black;
+  --background-color: white;
+  --list-navigation-selected-color: #228fb4;
+  --list-navigation-selected-background-color: rgba(34, 143, 180, 0.15);
+  --list-timeline-color: #a0a0a0;
+  --list-timeline-background-color: var(--background-color);
+  --list-navigation-title-color: #a0a0a0;
+  --list-navigation-event-color: #202020;
+  --list-navigation-event-hover-color: black;
+  --navigation-color: #a0a0a0;
+  --plus-button-color: white;
+  --event-color: #606060;
+  --lightbox-background-color: #080c12;
+  --lightbox-close-button-color: white;
+  --info-overlay-background-color: rgba(255, 255, 255, 0.9);
+  --info-overlay-close-button-color: #606060;
+  --info-overlay-key-color: #228fb4;
+  --info-overlay-text-color: var(--text-color);
+
+  /* Dark mode colors */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: #d0d0d0;
+    --background-color: #080c12;
+    --list-navigation-selected-color: #4ea5c3;
+    --list-navigation-selected-background-color: rgba(34, 143, 180, 0.1);
+    --list-timeline-color: #c0c0c0;
+    --list-timeline-background-color: var(--background-color);
+    --list-navigation-title-color: #909090;
+    --list-navigation-event-color: #c0c0c0;
+    --list-navigation-event-hover-color: white;
+    --navigation-color: #e0e0e0;
+    --plus-button-color: white;
+    --event-color: #c0c0c0;
+    --lightbox-background-color: #080c12;
+    --lightbox-close-button-color: #e0e0e0;
+    --info-overlay-background-color: rgba(0, 0, 0, 0.8);
+    --info-overlay-close-button-color: #c0c0c0;
+    --info-overlay-key-color: #4ea5c3;
+    --info-overlay-text-color: var(--text-color);
+  }
 }
 
 /* Animations */
@@ -39,7 +82,9 @@
 html,
 body {
   margin: 0;
+  background-color: var(--background-color);
   font-family: var(--main-font-family);
+  font-weight: var(--main-font-weight);
 }
 .noscroll {
   overflow: hidden !important;
@@ -51,6 +96,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  transition: var(--default-time);
 }
 .list-container .navigation button,
 .list-container .navigation a.button {
@@ -58,10 +104,10 @@ body {
   width: 40px;
   height: 40px;
   right: 30px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 2px solid #A0A0A0;
+  background-color: transparent;
+  border: 2px solid var(--navigation-color);
   border-radius: 25px;
-  color: #A0A0A0;
+  color: var(--navigation-color);
   font-size: 20px;
   opacity: 0.5;
   cursor: pointer;
@@ -102,6 +148,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 25px;
+  opacity: 0;
 }
 .list-container app-events-list .list-container ul {
   list-style-type: none;
@@ -113,11 +160,11 @@ body {
 .list-container app-events-list .list-container ul li .category-name,
 .list-container app-events-list .list-container ul li .event-name {
   padding: 7px 10px 7px 15px;
-  font-size: 18px;
+  font-size: 1.25rem;
 }
 .list-container app-events-list .list-container ul li .category-name {
-  color: #A0A0A0;
-  padding-right: 50px;
+  color: var(--list-navigation-title-color);
+  padding-right: 55px;
 }
 .list-container app-events-list .list-container ul li .event-name {
   display: inline-flex;
@@ -130,7 +177,7 @@ body {
   transition: var(--default-time);
 }
 .list-container app-events-list .list-container ul li .event-name .event-name-text {
-  color: #202020;
+  color: var(--list-navigation-event-color);
   line-height: 25px;
   transition: var(--default-time);
 }
@@ -140,30 +187,30 @@ body {
   width: 11px;
   min-width: 11px;
   height: 11px;
-  background-color: white;
-  border: 2px solid #A0A0A0;
+  background-color: var(--list-timeline-background-color);
+  border: 2px solid var(--list-timeline-color);
   border-radius: 10px;
   transition: var(--default-time);
 }
 .list-container app-events-list .list-container ul li .event-name:not(.active):hover .event-name-text {
-  color: black;
+  color: var(--list-navigation-event-hover-color);
   transform: scale(1.1);
 }
 .list-container app-events-list .list-container ul li .event-name:not(.active):hover .event-name-cursor {
-  border-color: black;
+  border-color: var(--list-navigation-event-hover-color);
 }
 .list-container app-events-list .list-container ul li .event-name.active {
-  background-color: rgba(34, 143, 180, 0.15);
+  background-color: var(--list-navigation-selected-background-color);
 }
 .list-container app-events-list .list-container ul li .event-name.active .event-date {
   display: inline;
 }
 .list-container app-events-list .list-container ul li .event-name.active .event-name-text {
-  color: var(--selected-color);
+  color: var(--list-navigation-selected-color);
 }
 .list-container app-events-list .list-container ul li .event-name.active .event-name-cursor {
-  background-color: var(--selected-color);
-  border-color: var(--selected-color);
+  background-color: var(--list-navigation-selected-color);
+  border-color: var(--list-navigation-selected-color);
 }
 .list-container app-events-list .list-container .line {
   position: absolute;
@@ -171,7 +218,7 @@ body {
   height: calc(100% - 120px);
   top: 80px;
   right: 42px;
-  border-left: 1px solid #A0A0A0;
+  border-left: 1px solid var(--list-timeline-color);
   z-index: 10;
 }
 .list-container .events app-event {
@@ -203,7 +250,7 @@ body {
   align-items: center;
   background-size: cover;
   background-position: center;
-  color: white;
+  color: var(--plus-button-color);
   font-size: 25px;
   cursor: pointer;
   opacity: 0.5;
@@ -217,12 +264,13 @@ body {
   transition: var(--slow-time);
 }
 .list-container .events app-event .event-info .event-name {
-  color: #606060;
-  font-size: 18px;
+  color: var(--event-color);
+  font-size: 1.25rem;
 }
 .list-container .events app-event .event-info .event-date {
-  color: #606060;
-  font-size: 14px;
+  margin-top: 5px;
+  color: var(--event-color);
+  font-size: 0.85rem;
 }
 .list-container .events app-event .event-container:not(.visible),
 .list-container .events app-event .event-info:not(.visible) {
@@ -237,12 +285,15 @@ app-lightbox .lightbox-container {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background-color: var(--lightbox-background-color);
   z-index: 10000;
 }
 app-lightbox .lightbox-container .lightbox-images {
-  width: 100%;
-  height: 100%;
+  top: 2rem;
+  left: 2rem;
+  width: calc(100% - 4rem);
+  height: calc(100% - 4rem);
+  position: relative;
 }
 app-lightbox .lightbox-container .lightbox-images .lightbox-image {
   position: absolute;
@@ -274,7 +325,7 @@ app-lightbox .lightbox-container .close-button {
   padding: 0;
   background-color: transparent;
   border: none;
-  color: white;
+  color: var(--lightbox-close-button-color);
   font-size: 25px;
   font-weight: 600;
   cursor: pointer;
@@ -296,7 +347,8 @@ app-lightbox .lightbox-container.hidden {
   width: 100%;
   height: 100%;
   top: 0;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: var(--info-overlay-background-color);
+  backdrop-filter: blur(5px);
   z-index: 10000;
   display: flex;
   flex-direction: column;
@@ -310,7 +362,7 @@ app-lightbox .lightbox-container.hidden {
   padding: 0;
   background-color: transparent;
   border: none;
-  color: #606060;
+  color: var(--info-overlay-close-button-color);
   font-size: 25px;
   font-weight: 600;
   cursor: pointer;
@@ -339,15 +391,21 @@ app-lightbox .lightbox-container.hidden {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
-  border: 1px solid #606060;
-  border-right-width: 3px;
-  border-bottom-width: 3px;
-  color: #606060;
+  border-radius: 8px;
+  border: 2px solid var(--info-overlay-key-color);
+  box-shadow: 0px 4px 0px 0px var(--info-overlay-key-color);
+  color: var(--info-overlay-key-color);
+  transition: var(--default-time);
 }
 .info-overlay .info-section .info-illustration .key.adaptive-key {
   width: auto;
   padding: 0 10px;
+}
+.info-overlay .info-section .info-illustration .double {
+  margin-top: 14px;
+  margin-left: 5px;
+  color: var(--text-color);
+  font-size: 18px;
 }
 .info-overlay .info-section .info-explaination {
   width: 60%;
@@ -355,6 +413,10 @@ app-lightbox .lightbox-container.hidden {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: var(--info-overlay-text-color);
+}
+.info-overlay .info-section .info-explaination p a {
+  color: var(--info-overlay-key-color);
 }
 .info-overlay.hidden {
   display: none;
@@ -393,7 +455,7 @@ app-lightbox .lightbox-container.hidden {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: white;
+    background-color: var(--background-color);
     z-index: 1000;
   }
   .list-container .navigation button {
@@ -404,7 +466,7 @@ app-lightbox .lightbox-container.hidden {
     bottom: unset;
     background: none;
     border: none;
-    color: black;
+    color: var(--text-color);
     font-size: 24px;
   }
   .list-container .navigation .navigation-mobile {
@@ -440,7 +502,7 @@ app-lightbox .lightbox-container.hidden {
     left: 0;
     display: flex;
     align-items: flex-start;
-    background-color: white;
+    background-color: var(--background-color);
     z-index: 10000;
     overflow: auto;
     transition: var(--default-time);
@@ -452,7 +514,7 @@ app-lightbox .lightbox-container.hidden {
     left: 4vw;
     border: none;
     background: none;
-    color: black;
+    color: var(--text-color);
     font-size: 24px;
     opacity: 0.5;
     transition: var(--default-time);

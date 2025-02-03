@@ -1,19 +1,49 @@
 import { Injectable } from '@angular/core';
-
-import { events } from './events.store';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
-  events: any;
-  
-  eventsList: any = [];
-
+  eventsJsonUrl = 'assets/events.json';
   months: any = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  constructor() {
-    this.events = events;
-    this.formatEventsList();
+  events: any;
+  eventsList: any = [];
+
+  constructor(private http: HttpClient) {}
+
+  // Get events
+  getEvents(): Observable<Object> {
+    return this.http.get<any>(this.eventsJsonUrl)
+    .pipe(map((eventsData: any) => {
+      this.events = eventsData;
+      this.formatEventsList();
+
+      let events: any[] = [];
+      for (let i = 0; i < this.eventsList.length; i++) {
+        events = events.concat(this.eventsList[i].events);
+      }
+
+      return events.sort((a: any, b: any) => {
+        return b.date.replace(/-/g, '') - a.date.replace(/-/g, '');
+      });
+    }));
+  }
+
+  // Get event by id
+  getEvent(eventId: number): any {
+    for(let i=0; i<this.events.length; i++) {
+      if(this.events[i].id == eventId) {
+        return this.events[i];
+      }
+    }
+    return null;
+  }
+
+  // Get list with categories and events
+  getList(): any {
+    return this.eventsList;
   }
 
   // To init events list
@@ -55,6 +85,7 @@ export class DataService {
       });
     }
   }
+
   private getEventListCategoryI(categoryName: string): number {
     for(let i=0; i<this.eventsList.length; i++) {
       if(this.eventsList[i].name == categoryName) {
@@ -63,6 +94,7 @@ export class DataService {
     }
     return -1;
   }
+
   private formatDate(date: string): string {
     if(date.length >= 7) {
       let monthI: number = +date.substring(5, 7) - 1;
@@ -76,32 +108,5 @@ export class DataService {
     }
 
     return '';
-  }
-
-  // Get list with categories and events
-  getList(): any {
-    return this.eventsList;
-  }
-
-  // Get events
-  getEvents(): void {
-    let events: any = [];
-    for(let i=0; i<this.eventsList.length; i++) {
-      events = events.concat(this.eventsList[i].events);
-    }
-    this.events.sort(function(a: any, b: any) {
-      return b.date.replace(/-/g, '') - a.date.replace(/-/g, '');
-    });
-    return events;
-  }
-
-  // Get event by id
-  getEvent(eventId: number): any {
-    for(let i=0; i<this.events.length; i++) {
-      if(this.events[i].id == eventId) {
-        return this.events[i];
-      }
-    }
-    return null;
   }
 }

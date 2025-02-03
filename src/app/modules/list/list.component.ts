@@ -1,7 +1,6 @@
 import { Component, HostListener, Renderer2, OnInit } from '@angular/core';
 
 import { DataService } from '../../data/data.service';
-import { events } from 'src/app/data/events.store';
 
 @Component({
     selector: 'app-list',
@@ -11,8 +10,7 @@ import { events } from 'src/app/data/events.store';
 export class ListComponent implements OnInit{
   events: any;
   eventsList: any = [];
-
-  timer: any;
+  list: any = [];
 
   mobileNavigationOpen: boolean = false;
 
@@ -23,26 +21,19 @@ export class ListComponent implements OnInit{
 
   infoOverlayHidden: boolean = true;
   scrollTopButtonHidden: boolean = true;
+  lastArrowUpPress: number = 0;
 
-  constructor(private data: DataService, private renderer: Renderer2) {
-    this.events = this.data.getEvents();
-    this.selectedEventId = this.events[0].id;
-  }
+  constructor(private data: DataService, private renderer: Renderer2) {}
 
   ngOnInit(): void {
-    if(this.events.length > 0) {
-      this.eventsList.push(this.events[0]);
-    }
+    this.data.getEvents()
+    .subscribe((data: any) => { 
+      this.events = data;
+      this.list = this.data.getList();
+      this.selectedEventId = this.events[0].id;
 
-    let index: number = 1;
-    this.timer = setInterval(() => {
-        if (index < this.events.length) {
-          this.eventsList.push(this.events[index]);
-          index++;
-        } else { 
-          clearInterval(this.timer); 
-        }
-    }, 250);
+      this.eventsList = this.events;
+    });
   }
 
   displayEvent(eventId: number): void {
@@ -102,28 +93,22 @@ export class ListComponent implements OnInit{
     let margin: number = Math.floor(window.innerHeight * 15 / 100);
 
     // Events
-    for(let i=0; i<events.length; i++) {
-      let el = document.getElementById('event_' + events[i].id);
+    for(let i=0; i<this.events.length; i++) {
+      let el = document.getElementById('event_' + this.events[i].id);
+
+      if (!el) continue;
 
       // If event fills 50% or more of the scree
-      if(el.offsetTop > window.pageYOffset + Math.round(window.innerHeight * 0.5)) {
-        if(i > 0) {
-          this.selectedEventId = events[i - 1].id;
-        } else {
-          this.selectedEventId = events[i].id;
-        }
+      if(el.offsetTop > window.scrollY + Math.round(window.innerHeight * 0.5)) {
+        this.selectedEventId = i > 0 ? this.events[i - 1].id : this.events[i].id;
         break;
-      } else if(i == events.length - 1) {
-        this.selectedEventId = events[i].id;
+      } else if(i == this.events.length - 1) {
+        this.selectedEventId = this.events[i].id;
       }
     }
 
     // Scroll top button
-    if(window.pageYOffset > 300 && this.scrollTopButtonHidden) {
-      this.scrollTopButtonHidden = false;
-    } else if(window.pageYOffset <= 300 && !this.scrollTopButtonHidden) {
-      this.scrollTopButtonHidden = true;
-    }
+    this.scrollTopButtonHidden = window.scrollY <= 300;
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -131,10 +116,20 @@ export class ListComponent implements OnInit{
     // When lightbox, info panel and mobile navigation aren't open
     if(this.lightboxEventId == -1 && this.infoOverlayHidden && !this.mobileNavigationOpen) {
       // Navigation keys
+
       // Arrow up
       if(event.key == 'ArrowUp') {
         event.preventDefault();
-        this.displayPreviousEvent();
+        const now = Date.now();
+
+        if (now - this.lastArrowUpPress < 300) {
+          // Double press
+          this.scrollTop();
+        } else {
+          // Simple
+          this.displayPreviousEvent();
+        }
+        this.lastArrowUpPress = now;
       }
       // Arrow down
       if(event.key == 'ArrowDown') {

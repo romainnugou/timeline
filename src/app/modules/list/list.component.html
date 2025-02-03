@@ -28,18 +28,20 @@
   <!-- Events list -->
   <app-events-list
     [ngClass]="{'hidden': !mobileNavigationOpen}"
+    [list]="list"
+    [selectedEventId]="selectedEventId"
     (eventSelect)="displayEvent($event)"
-    (closeMobileNavigationEvent)="closeMobileNavigation()"
-    [selectedEventId]="selectedEventId">
+    (closeMobileNavigationEvent)="closeMobileNavigation()">
   </app-events-list>
 
   <!-- Events images -->
   <div class="events">
-    <app-event *ngFor="let event of eventsList"
-      [id]="'event_' + event.id"
-      [event]="event"
-      (openLightbox)="openLightbox($event)">
-    </app-event>
+    @for(event of eventsList; track $index) {
+      <app-event [id]="'event_' + event.id"
+        [event]="event"
+        (openLightbox)="openLightbox($event)">
+      </app-event>
+    }
   </div>
 
   <!-- Full size display component -->
@@ -65,6 +67,14 @@
       </div>
       <div class="info-explaination">
         Navigate between events
+      </div>
+    </div>
+    <div class="info-section">
+      <div class="info-illustration">
+        <div class="key"><i class="fas fa-chevron-up"></i></div> <span class="double">x2</span>
+      </div>
+      <div class="info-explaination">
+        Double press to go back to top
       </div>
     </div>
     <div class="info-section">
@@ -99,6 +109,14 @@
       </div>
       <div class="info-explaination">
         Display and hide info panel
+      </div>
+    </div>
+    <div class="info-section" style="margin-top: 3rem;">
+      <div class="info-illustration"></div>
+      <div class="info-explaination">
+        <p>
+          Made by <a href="https://www.romainnugou.com" target="_blank">Romain Nugou</a> / Source code on <a href="https://github.com/romainnugou/timeline" target="_blank">GitHub</a>
+        </p>
       </div>
     </div>
   </div>

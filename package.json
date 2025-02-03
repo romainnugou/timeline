@@ -1,12 +1,12 @@
 {
   "name": "timeline",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "eslint .",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -25,14 +25,21 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.1.5",
+    "@angular-eslint/eslint-plugin": "^19.0.2",
+    "@angular-eslint/eslint-plugin-template": "^19.0.2",
+    "@angular-eslint/template-parser": "^19.0.2",
     "@angular/cli": "^19.1.5",
     "@angular/compiler-cli": "^19.1.4",
     "@angular/language-service": "^19.1.4",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
-    "codelyzer": "^5.1.2",
-    "jasmine-core": "~3.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "angular-eslint": "19.0.2",
+    "eslint": "^9.19.0",
+    "eslint-define-config": "^2.1.0",
+    "jasmine-core": "^5.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.1.0",
@@ -41,7 +48,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "^7.0.0",
     "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
-    "typescript": "~5.7.3"
+    "typescript": "~5.7.3",
+    "typescript-eslint": "8.18.0"
   }
 }
