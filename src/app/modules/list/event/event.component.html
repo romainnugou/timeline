@@ -1,26 +1,30 @@
-<!-- If 4 or less images -->
-<div class="event-container" [ngClass]="{'visible': loaded}">
-  @for(image of imagesList; track $index) {
-    <img #image
-      [src]="'assets/img/' + event.folder + '/' + image"
-      alt=""
-      loading="lazy"
-      (load)="onLoad($event)"
-      (click)="openImage($index)" />
-  }
+<div class="event-container">
+  <div class="event-images" [ngClass]="{ 'visible': loaded }">
+    @for(image of imagesList; track $index) {
+      <img #image
+        [src]="'assets/img/' + event.folder + '/' + image"
+        [alt]="event.name"
+        loading="lazy"
+        (load)="onLoad($event)"
+        (click)="openImage($index)" />
+    }
+  
+    @if(event.images.length > maxImages) {
+      <div class="event-plus-button"
+        [style.height]="plusButtonHeight + 'px'"
+        [style.background-image]="'url(assets/img/' + event.folder + '/' + event.images[maxImages] + ')'"
+        (click)="openImage(maxImages)">
+        <i class="fas fa-plus"></i>
+      </div>
+    }
+  </div>
 
-  @if(event.images.length > maxImages) {
-    <div class="event-plus-button"
-      [style.height]="plusButtonHeight + 'px'"
-      [style.background-image]="'url(assets/img/' + event.folder + '/' + event.images[maxImages] + ')'"
-      (click)="openImage(maxImages)">
-      <i class="fas fa-plus"></i>
-    </div>
+  @if(!loaded) {
+    <div class="event-placeholder"></div>
   }
 </div>
 
-<div class="event-info"
-  [ngClass]="{'visible': loaded}">
+<div class="event-info">
   <div class="event-name">{{ event.name }}</div>
   <div class="event-date">{{ event.formattedDate }}</div>
 </div>
