@@ -15,12 +15,10 @@
     "@angular/common": "^19.1.4",
     "@angular/compiler": "^19.1.4",
     "@angular/core": "^19.1.4",
-    "@angular/forms": "^19.1.4",
     "@angular/platform-browser": "^19.1.4",
     "@angular/platform-browser-dynamic": "^19.1.4",
     "@angular/router": "^19.1.4",
-    "rxjs": "~6.5.4",
-    "tslib": "^2.0.0",
+    "rxjs": "^7.8.1",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
@@ -33,7 +31,7 @@
     "@angular/language-service": "^19.1.4",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^12.11.1",
+    "@types/node": "^22.13.0",
     "@typescript-eslint/eslint-plugin": "^8.22.0",
     "@typescript-eslint/parser": "^8.22.0",
     "angular-eslint": "19.0.2",
@@ -46,8 +44,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "protractor": "^7.0.0",
-    "ts-node": "~8.3.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.7.3",
     "typescript-eslint": "8.18.0"
   }
