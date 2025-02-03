@@ -229,20 +229,46 @@ body {
   padding: 50px 0;
 }
 .list-container .events app-event .event-container {
+  position: relative;
   width: 600px;
+}
+@keyframes placeHolderShimmer{
+  0%{
+      background-position: -800px 0
+  }
+  100%{
+      background-position: 800px 0
+  }
+}
+.list-container .events app-event .event-container .event-placeholder {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  aspect-ratio: 1;
+  
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: darkgray;
+  background: linear-gradient(to right, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 800px 104px;
+}
+.list-container .events app-event .event-container .event-images {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   transition: var(--slow-time);
 }
-.list-container .events app-event .event-container img:first-child {
+.list-container .events app-event .event-container .event-images img:first-child {
   width: 100%;
   margin-bottom: 5px;
 }
-.list-container .events app-event .event-container img {
+.list-container .events app-event .event-container .event-images img {
   cursor: pointer;
 }
-.list-container .events app-event .event-container .event-plus-button {
+.list-container .events app-event .event-container .event-images .event-plus-button {
   width: 40px;
   height: 165px;
   display: flex;
@@ -255,7 +281,7 @@ body {
   cursor: pointer;
   opacity: 0.5;
 }
-.list-container .events app-event .event-container .event-plus-button:hover {
+.list-container .events app-event .event-container .event-images .event-plus-button:hover {
   opacity: 0.7;
 }
 .list-container .events app-event .event-info {
@@ -272,8 +298,7 @@ body {
   color: var(--event-color);
   font-size: 0.85rem;
 }
-.list-container .events app-event .event-container:not(.visible),
-.list-container .events app-event .event-info:not(.visible) {
+.list-container .events app-event .event-container .event-images:not(.visible) {
   opacity: 0;
 }
 

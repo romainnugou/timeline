@@ -1,11 +1,11 @@
-import { Component, OnChanges, Input, Output, EventEmitter, ViewChildren, Renderer2, ElementRef, QueryList } from '@angular/core';
+import { Component, OnChanges, AfterViewInit, Input, Output, EventEmitter, ViewChildren, Renderer2, ElementRef, QueryList } from '@angular/core';
 
 @Component({
     selector: 'app-event',
     templateUrl: './event.component.html',
     standalone: false
 })
-export class EventComponent implements OnChanges {
+export class EventComponent implements OnChanges, AfterViewInit {
   @Input() event: any;
   @ViewChildren('image') images: QueryList<ElementRef>;
   @Output() openLightbox = new EventEmitter();
@@ -22,10 +22,34 @@ export class EventComponent implements OnChanges {
 
   loaded: boolean = false;
 
+  isInViewport: boolean = false;
+  intersectionObserver: IntersectionObserver;
+
   constructor(private renderer: Renderer2, private el:ElementRef) { }
 
   ngOnChanges(): void {
     this.imagesList = this.event.images.slice(0, 4);
+  }
+
+  ngAfterViewInit(): void {
+    this.setupIntersectionObserver();
+  }
+
+  setupIntersectionObserver(): void {
+    const options = {
+      root: null,
+      threshold: 0,
+    };
+
+    this.intersectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.loaded) {
+          this.isInViewport = true;
+        } 
+      });
+    }, options);
+
+    this.intersectionObserver.observe(this.el.nativeElement);
   }
 
   onLoad($event: any): void {
