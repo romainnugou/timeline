@@ -36,10 +36,10 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Demo
 
-[romainnugou.com/timeline](https://romainnugou.com/timeline)
+[timeline.romain.ng](https://timeline.romain.ng)
 
 ## About
 
 Built with Angular 19.
 
-Made by [Romain Nugou](https://romainnugou.com).
+Made by [Romain Nugou](https://romain.ng).
